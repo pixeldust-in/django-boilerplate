@@ -24,17 +24,12 @@ SECRET_KEY = "0+d1xdj%+0tw=5)$3k)ku%!j!!+1#i%9q9=)a*fd*b_pdxdk2t"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 PRODUCTION = False
-HASHID_FIELD_SALT = "expo lms app"
+HASHID_FIELD_SALT = ""
 HASHID_UPPER_ALPHA_NUMERIC = "0123456789ABCDEFGHIJKLMNOPQRSTUVQXYZ"
 
 env_path = os.path.join(BASE_DIR)
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USE_TLS = True
-EMAIL_HOST = os.getenv("EMAIL_HOST")
-EMAIL_PORT = os.getenv("EAIL_PORT")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 ADMINS = (("Sandip Baradiya", "baradiya.sandip@gmail.com"),)
 
@@ -51,7 +46,7 @@ COMPRESS_CSS_FILTERS = [
 ]
 
 AUTH_USER_MODEL = "core.User"
-LOGIN_REDIRECT_URL = "dashboard"
+LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login/"
 
 
@@ -109,22 +104,6 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-
-DATABASES = {
-    "default": {
-        # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or
-        # 'oracle'.
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        # Or path to database file if using sqlite3.
-        "NAME": "expo2",
-        "USER": "",  # Not used with sqlite3.
-        "PASSWORD": "",  # Not used with sqlite3.
-        # Set to empty string for localhost. Not used with sqlite3.
-        "HOST": "",
-        # Set to empty string for default. Not used with sqlite3.
-        "PORT": "",
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -188,7 +167,6 @@ LOGGING = {
         },
     },
     "loggers": {
-        # "django.db.backends": {"handlers": ["console"], "level": "DEBUG"},
         "django": {
             "handlers": ["mail_admins", "console", "syslog"],
             "level": "ERROR",

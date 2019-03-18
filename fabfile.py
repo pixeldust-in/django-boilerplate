@@ -16,7 +16,7 @@ env.activate = "source {}/venv/bin/activate".format(env.directory)
 run.replace_env = True
 
 APP_DIR = "~/var/www/{project_name}"
-SUPERVISOR_APP_NAME = ["expo"]
+SUPERVISOR_APP_NAME = ["{project_name}"]
 
 figlet = Figlet(font="slant")
 
