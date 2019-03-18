@@ -1,0 +1,72 @@
+{% load static compress %}
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>{% block title %}Dashboard{% endblock %}{{app_title}}</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- GOOGLE FONTS -->
+
+	{% compress css %}
+		{% block base_css %}
+		<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+		<link rel="stylesheet" href="{% static 'vendor/toastr/toastr.min.css' %}">
+		<link rel="stylesheet" href="{% static 'css/base.css' %}">
+		{% endblock base_css %}
+	{% endcompress css %}
+		{% compress css %}
+		{% block css %}
+		{% endblock css %}
+	{% endcompress css %}
+
+</head>
+
+<body>
+	<div id="wrapper">
+		{% include "components/header.html" %}
+
+		{% block body %}
+		Hello!
+		{% endblock %}
+		{% include "components/footer.html" %}
+
+	</div>
+	<!-- Javascript -->
+
+	{% compress js %}
+		{% block base_js %}
+		<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+		<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'vendor/toastr/toastr.min.js' %}"></script>
+		<script type="text/javascript">
+			function showMessage(msg, type){
+				if(toastr){
+					type = type || 'success'
+					toastr.options = {
+						closeButton: true,
+						positionClass: "toast-bottom-full-width",
+						onclick: null,
+						fadeIn: 300,
+						fadeOut: 1000,
+						timeOut: 5000,
+						extendedTimeOut: 1000
+					}
+					toastr[type] && toastr[type](msg);
+				}
+			}
+			{% for message in messages %}
+				showMessage('{{ message }}', '{{ message.tag }}')
+			{% endfor %}
+		</script>
+		{% endblock base_js %}
+	{% endcompress js %}
+		{% compress js %}
+		{% block js %}
+		{% endblock js %}
+	{% endcompress js %}
+
+</body>
+
+</html>

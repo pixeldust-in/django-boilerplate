@@ -1,0 +1,37 @@
+exclude: 'venv-update'
+repos:
+-   repo: https://github.com/ambv/black
+    sha: 18.9b0
+    hooks:
+    -   id: black
+-   repo: git://github.com/pre-commit/pre-commit-hooks
+    sha: v2.0.0
+    hooks:
+    -   id: trailing-whitespace
+        exclude: \.(css|ts|tsx|bck|csv)$
+    -   id: check-merge-conflict
+    -   id: check-json
+    -   id: debug-statements
+    -   id: check-added-large-files
+        args: [--maxkb=500]
+        exclude: (static\/vendor\/qr\/instascan.min.js)$
+    -   id: flake8
+        args: [--max-line-length=131, "--ignore=W503,E203"]
+        exclude: (tests/.*|.*/migrations/.*\.py|.*/custom_dictionaries.py)$
+    -   id: flake8
+        name: Flake8 migrations
+        args: ["--ignore=N806,E501,W503", "--max-line-length=131"]
+        files: (.*/migrations/.*\.py)$
+    -   id: flake8
+        name: Flake8 tests
+        args: ["--ignore=F811,W503", "--max-line-length=131"]
+        files: (tests/.*\.py)$
+-   repo: local
+    hooks:
+    -   id: isort
+        name: Sorting Imports
+        entry: isort
+        language: system
+        args: ["-y"]
+        files: \.py$
+        exclude: (.*/scripts/.*|.*/migrations/.*)$
