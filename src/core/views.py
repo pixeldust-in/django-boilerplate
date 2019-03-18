@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib.auth import login, logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.urls import reverse
 from django.views.generic import RedirectView
 
 from .forms import LoginForm
@@ -20,8 +19,7 @@ def login_view(request):
             next = request.GET.get("next")
             if next:
                 return HttpResponseRedirect(next)
-            return HttpResponseRedirect(reverse("expo:dashboard"))
-    return render(request, "base.html", context)
+    return render(request, "core/login.html", context)
 
 
 class LogoutView(RedirectView):
